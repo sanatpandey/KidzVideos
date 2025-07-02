@@ -1,0 +1,32 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: zuul-api-gateway
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+zuul:
+  host:
+    max-content-length: 100000000  # 100MB
+  routes:
+    user-service:
+      path: /api/user/**
+      service-id: user-service
+    content-service:
+      path: /api/content/**
+      service-id: content-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+ribbon:
+  eureka:
+    enabled: true

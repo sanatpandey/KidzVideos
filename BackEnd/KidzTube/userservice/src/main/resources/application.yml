@@ -1,0 +1,50 @@
+#spring:
+ # h2:
+  #  console:
+   #   enabled: true
+  #datasource:
+   # url: jdbc:h2:mem:testdb
+  #servlet:
+   # multipart:
+    #  max-file-size: 50MB
+     # max-request-size: 50MB
+  #application:
+   # name: user-service
+
+#eureka:
+ # client:
+  #  service-url:
+   #   defaultZone: http://localhost:8761/eureka
+#server:
+ # port: 8081
+
+
+server:
+  port: 8081
+
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    initialization-mode: always
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+
+jwt:
+  secret: mysupersecretkeymysecretkey1234567890
+  expiration: 3600000 # 1 hour in ms
