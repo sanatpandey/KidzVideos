@@ -16,7 +16,7 @@ const Login = () => {
     setError('');
     console.log("Login started", { email, password });
     try {
-      const response = await axios.post('http://localhost/api/user/login', {
+      const response = await axios.post('/api/user/login', {
         email,
         password
       }, {
@@ -25,12 +25,17 @@ const Login = () => {
         }
       });
 
-      const { token, userName} = response.data;
+      const { token, userName, role} = response.data;
       localStorage.setItem('authToken', token);
       localStorage.setItem('userName', userName);
-      localStorage.setItem('userRole', response.data.role);
+      localStorage.setItem('userRole', role);
       console.log("Login successful", userName);
-      navigate('/');
+      console.log("Role", role);
+      if (role === 'admin') {
+        navigate('/upload');
+      } else {
+        navigate('/');
+      }
     } catch (err) {
       console.error("Login failed", err);
       setError('Invalid credentials or network error');

@@ -6,6 +6,8 @@ import Signup from './pages/SignUp';
 import Detail from './pages/Detail';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
+import AdminRoute from './components/AdminRoute';
+import UploadVideo from './pages/UploadVideo';
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />
+        </Route>
+        <Route element={<AdminRoute />}>
+          <Route path="/upload" element={<UploadVideo />} />
         </Route>
     
       </Routes>

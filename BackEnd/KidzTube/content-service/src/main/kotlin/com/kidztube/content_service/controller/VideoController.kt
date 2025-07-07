@@ -7,6 +7,7 @@ import com.kidztube.content_service.service.VideoService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestPart
@@ -24,6 +25,7 @@ class VideoController {
     @Autowired
     private lateinit var s3Service: S3Service
 
+    @CrossOrigin(origins = ["http://localhost:5173"])
     @PostMapping("/save", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     fun saveVideo(
         @RequestPart("file") file: MultipartFile,
