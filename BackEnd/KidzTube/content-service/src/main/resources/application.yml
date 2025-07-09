@@ -25,6 +25,9 @@ spring:
 aws:
   region: eu-north-1
   bucket: kidz-videos
+logging:
+  level:
+    software.amazon.awssdk: DEBUG
 
 eureka:
   client:

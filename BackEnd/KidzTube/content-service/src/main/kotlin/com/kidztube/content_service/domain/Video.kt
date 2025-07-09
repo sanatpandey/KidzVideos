@@ -31,5 +31,8 @@ data class Video(
     val description: String,
 
     @Column
-    val s3Url: String
+    val s3Url: String,
+
+    @Column
+    var thumbnailUrl: String? = null
 )

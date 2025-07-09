@@ -34,6 +34,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 	implementation("software.amazon.awssdk:s3:2.25.23")
+	implementation("org.springframework.kafka:spring-kafka") // or your preferred version
+	implementation("com.fasterxml.jackson.core:jackson-databind")
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.h2database:h2")
 	annotationProcessor("org.projectlombok:lombok")
