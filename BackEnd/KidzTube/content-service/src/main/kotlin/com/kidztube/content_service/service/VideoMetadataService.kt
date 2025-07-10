@@ -8,10 +8,10 @@ import java.lang.RuntimeException
 class VideoMetadataService(
     private val videoRepo: VideoRepo
 ) {
-    fun updateThumbnailUrl(videoId: Long, thumbnailUrl: String){
+    fun updateThumbnailUrl(videoId: Long, thumbnailKey: String){
         val video = videoRepo.findById(videoId).orElseThrow{ RuntimeException("Video Not found") }
 
-        video.thumbnailUrl = thumbnailUrl
+        video.thumbnailKey = thumbnailKey
         videoRepo.save(video)
     }
 }

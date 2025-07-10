@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const VideoCard = ({ id, title }) => {
+const VideoCard = ({ video }) => {
   return (
-    <Link to={`/detail/${id}`} className="card min-w-[200px] hover:scale-105 transition-transform duration-200">
-      <img src={`https://via.placeholder.com/200x120?text=${title}`} alt={title} className="w-full h-32 object-cover rounded-t-xl" />
-      <div className="p-3 bg-pink-50 rounded-b-xl">
-        <p className="text-sm font-medium text-pink-800 text-center">{title}</p>
+    <div className="w-64 bg-white rounded-lg shadow-md overflow-hidden">
+      <img src={video.thumbnailUrl} alt={video.name} className="h-40 w-full object-cover" />
+      <div className="p-3">
+        <h4 className="font-bold text-lg">{video.name}</h4>
+        <p className="text-sm text-gray-600">{video.genre}</p>
       </div>
-    </Link>
+    </div>
   );
 };
 

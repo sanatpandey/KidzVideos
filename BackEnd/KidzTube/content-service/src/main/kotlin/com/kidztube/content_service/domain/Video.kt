@@ -30,9 +30,9 @@ data class Video(
     @Column
     val description: String,
 
-    @Column
-    val s3Url: String,
+    @Column(name = "video_key")
+    val videoKey: String,
 
-    @Column
-    var thumbnailUrl: String? = null
+    @Column(name = "thumbnail_key")
+    var thumbnailKey: String? = null
 )

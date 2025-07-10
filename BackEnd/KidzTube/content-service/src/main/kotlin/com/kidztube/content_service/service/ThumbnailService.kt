@@ -56,7 +56,7 @@ class ThumbnailService(
                     .build(), RequestBody.fromFile(thumbnailFile)
             )
 
-            return "https://${awsProperties.bucket}.s3.amazonaws.com/$thumbKey"
+            return thumbKey
         }finally {
             if (tempVideo.exists()) tempVideo.delete()
             if (thumbnailFile.exists()) thumbnailFile.delete()

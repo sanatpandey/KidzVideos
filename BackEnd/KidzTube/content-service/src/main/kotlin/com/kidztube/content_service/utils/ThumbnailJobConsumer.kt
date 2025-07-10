@@ -16,9 +16,9 @@ class ThumbnailJobConsumer(
     fun consume(job: ThumbnailJob){
         println("Received Job:$job")
         try {
-            val thumbnailUrl = thumbnailService.generateAndUploadThumbnail(job)
+            val thumbnailKey = thumbnailService.generateAndUploadThumbnail(job)
 
-            videoMetadataService.updateThumbnailUrl(videoId = job.videoId, thumbnailUrl = thumbnailUrl)
+            videoMetadataService.updateThumbnailUrl(videoId = job.videoId, thumbnailKey = thumbnailKey)
             println("Thumbnail generated for ${job.videoId}")
         }catch (e: Exception){
             println(e.message)

@@ -21,7 +21,7 @@ class ThumbnailWorker(
             try {
                 val thumbKey = thumnailService.generateAndUploadThumbnail(job)
                 val video = videoRepo.findById(job.videoId).orElseThrow()
-                video.thumbnailUrl = "https://${awsProperties.bucket}.s3.ap-south-1.amazonaws.com/$thumbKey"
+                video.thumbnailKey = thumbKey
                 videoRepo.save(video)
                 println("Thumbnail generated and DB updated for video id ${video.id}")
             }catch (e: Exception){

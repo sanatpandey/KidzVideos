@@ -10,9 +10,7 @@ interface VideoService {
     fun getVideo(name: String, platform: String): Video
 
     fun saveVideo(metaData: VideoFileDto,
-                  s3Url: String): Video
+                  videoKey: String): Video
 
     fun getAllVideoDetails(): List<VideoDto>
-
-    fun getAllVideoDetailsFromPlatform(platform: String): List<VideoDto>
 }
