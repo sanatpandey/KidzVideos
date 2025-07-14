@@ -5,9 +5,10 @@ import com.kidztube.content_service.dto.VideoDto
 import com.kidztube.content_service.dto.VideoFileDto
 import org.springframework.web.multipart.MultipartFile
 import java.io.IOException
+import java.util.Optional
 
 interface VideoService {
-    fun getVideo(name: String, platform: String): Video
+    fun getVideo(id: Long): Optional<Video?>
 
     fun saveVideo(metaData: VideoFileDto,
                   videoKey: String): Video

@@ -17,6 +17,7 @@ import java.io.FileInputStream
 import java.io.IOException
 import java.time.LocalDate
 import java.util.Date
+import java.util.Optional
 
 @Service
 class VideoServiceImpl(
@@ -26,11 +27,8 @@ class VideoServiceImpl(
     @Autowired
     private lateinit var videoRepo: VideoRepo
 
-    override fun getVideo(name: String, platform: String): Video {
-            if (!videoRepo.existsByName(name)){
-                throw VideoNotFoundException()
-            }
-            return videoRepo.findByName(name)
+    override fun getVideo(id: Long): Optional<Video?> {
+        return videoRepo.findById(id)
     }
 
     override fun saveVideo(
@@ -56,6 +54,7 @@ class VideoServiceImpl(
     override fun getAllVideoDetails(): List<VideoDto> {
         return videoRepo.findAll().map {
             VideoDto(
+                id = it.id,
                 name = it.name,
                 description = it.description,
                 rating = 0f,

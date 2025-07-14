@@ -34,3 +34,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
+jwt:
+  secret: mysupersecretkeymysecretkey1234567890
+  expiration: 3600000 # 1 hour in ms
+
