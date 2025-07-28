@@ -36,7 +36,9 @@ dependencies {
 	implementation("software.amazon.awssdk:s3:2.25.23")
 	implementation("org.springframework.kafka:spring-kafka") // or your preferred version
 	implementation("com.fasterxml.jackson.core:jackson-databind")
-	implementation("io.jsonwebtoken:jjwt:0.9.1")
+	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.h2database:h2")
 	annotationProcessor("org.projectlombok:lombok")

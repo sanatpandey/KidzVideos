@@ -30,5 +30,5 @@ data class User(
     val ageGroup: String,
 
     @Column
-    val role: String
+    var role: String
 )

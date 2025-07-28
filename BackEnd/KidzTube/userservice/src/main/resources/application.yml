@@ -47,4 +47,5 @@ eureka:
 
 jwt:
   secret: mysupersecretkeymysecretkey1234567890
-  expiration: 3600000 # 1 hour in ms
+  accessTokenExpiration: 900000        # 15 minutes in milliseconds (15 * 60 * 1000)
+  refreshTokenExpiration: 604800000

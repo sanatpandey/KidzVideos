@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import gateway from '../utils/axiosGateway';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -16,17 +17,18 @@ const Login = () => {
     setError('');
     console.log("Login started", { email, password });
     try {
-      const response = await axios.post('/api/user/login', {
+      const response = await gateway.post('/login', {
         email,
         password
       }, {
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        withCredentials: true
       });
 
-      const { token, userName, role} = response.data;
-      localStorage.setItem('authToken', token);
+      const { accessToken, userName, role} = response.data;
+      localStorage.setItem('authToken', accessToken);
       localStorage.setItem('userName', userName);
       localStorage.setItem('userRole', role);
       console.log("Login successful", userName);

@@ -6,15 +6,17 @@ import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
 import lombok.Value
 import org.springframework.stereotype.Component
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 import java.util.Date
 
 @Component
 class JwtUtil(
     private val jwtConfig: JwtConfig
 ) {
-    fun generateToken(userName: String, role: String): String {
+    fun generateAccessToken(userName: String, role: String): String {
         val now = Date()
-        val expiry = Date(now.time + jwtConfig.expiration)
+        val expiry = Date(now.time + jwtConfig.accessTokenExpiration)
         val claims = mapOf("role" to role)
         return Jwts.builder()
             .setClaims(claims)
@@ -55,5 +57,16 @@ class JwtUtil(
             .build()
             .parseClaimsJws(token)
             .body
+    }
+
+    fun generateRefreshToken(email: String): String = Jwts.builder()
+            .setSubject(email)
+            .setIssuedAt(Date())
+            .setExpiration(Date(System.currentTimeMillis() + jwtConfig.refreshTokenExpiration))
+            .signWith(Keys.hmacShaKeyFor(jwtConfig.secret.toByteArray()), SignatureAlgorithm.HS256)
+            .compact()
+
+    fun getRefreshTokenExpiryDate(): LocalDateTime {
+        return LocalDateTime.now().plus(jwtConfig.refreshTokenExpiration, ChronoUnit.MILLIS)
     }
 }

@@ -4,6 +4,7 @@ import com.kidztube.content_service.domain.VideoProgress
 import com.kidztube.content_service.repository.VideoProgressRepo
 import com.kidztube.content_service.repository.VideoRepo
 import com.kidztube.content_service.utils.JwtUtil
+import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -14,20 +15,17 @@ class VideoProgressService (
     private val videoRepo: VideoRepo,
     private val jwtUtil: JwtUtil
 ){
-    fun saveOrUpdateProgress(token: String, videoId: Long, seconds: Int){
+    @Transactional
+    fun saveOrUpdateProgress(token: String, videoId: Long, seconds: Int) {
         if (!jwtUtil.validateToken(token)) {
             return
         }
         val userEmail = jwtUtil.extractEmail(token)
         val video = videoRepo.findById(videoId).orElseThrow{ RuntimeException("Video Not found") }
+        val updated = progressRepo.updateSecondsIfExists(userEmail, videoId, seconds)
 
-        val existing = progressRepo.findByUserEmailAndVideoId(userEmail, videoId)
-
-        if(existing != null){
-            existing.lastWatchedSecond = seconds
-            existing.updatedAt = LocalDateTime.now()
-            progressRepo.save(existing)
-        }else{
+        if (updated == 0) {
+            // Record didn't exist, insert new
             val progress = VideoProgress(
                 userEmail = userEmail,
                 video = video,
